@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZERO2HERO — From Zero Experience to Career-Ready</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-base:#0b0d0f;
+    --bg-alt:#111316;
+    --bg-alt2:#0c0e11;
+    --card:#1a1c1f;
+    --card-alt:#1e2023;
+    --surface:#282a2d;
+    --border:#333538;
+    --text-primary:#e2e2e6;
+    --text-secondary:#c5c6ca;
+    --text-muted:#8f9194;
+    --accent:#abd551;
+    --accent-ink:#253600;
+    --danger-bg:rgba(147,0,10,0.3);
+    --danger-text:#ffb4ab;
+    --font-display:'Syne', sans-serif;
+    --font-body:'Plus Jakarta Sans', sans-serif;
+    --font-mono:'Space Grotesk', sans-serif;
+    --container:1280px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-base);
+    color:var(--text-primary);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit;}
+  ul{list-style:none;}
+  input, textarea, select{font-family:inherit; font-size:15px; color:var(--text-primary); border:none; outline:none; background:transparent; width:100%;}
+  input::placeholder, textarea::placeholder{color:var(--text-muted);}
+
+  .wrap{max-width:var(--container); margin:0 auto; padding:0 48px;}
+  section{padding:128px 0;}
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:16px;
+    display:block;
+  }
+  h1,h2,h3,h4{font-family:var(--font-display); font-weight:700; color:var(--text-primary); letter-spacing:-0.02em;}
+  .lede{font-size:18px; line-height:1.56; color:var(--text-secondary); letter-spacing:-0.01em; max-width:56ch;}
+
+  /* -------------------- HEADER -------------------- */
+  header.site-header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(12,14,17,0.8);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .header-inner{
+    max-width:var(--container); margin:0 auto; padding:0 48px;
+    height:80px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:8px;}
+  .brand-mark{
+    width:32px; height:32px; border-radius:8px;
+    background:linear-gradient(135deg, var(--accent), #6f9a2a);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--accent-ink); font-family:var(--font-display); font-weight:800; font-size:15px;
+  }
+  .brand-name{font-family:var(--font-body); font-weight:700; font-size:18px; letter-spacing:-0.02em; text-transform:uppercase; color:var(--text-primary);}
+  nav.main-nav{display:flex; gap:32px;}
+  nav.main-nav a{font-size:15px; color:var(--text-secondary); transition:color .15s;}
+  nav.main-nav a:hover{color:var(--text-primary);}
+  .header-actions{display:flex; align-items:center; gap:16px;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    font-family:var(--font-body); font-weight:700; font-size:18px; letter-spacing:-0.01em;
+    border-radius:8px; padding:16px 32px; white-space:nowrap;
+  }
+  .btn-sm{font-size:15px; padding:8px 20px; font-weight:600; border-radius:8px;}
+  .btn-accent{
+    background:var(--accent); color:var(--accent-ink);
+    box-shadow:0 0 12px rgba(199,243,107,0.22);
+  }
+  .btn-ghost{background:rgba(40,42,45,0.8); color:var(--text-primary);}
+  .icon-btn{
+    width:32px; height:32px; border-radius:12px; background:#c6c6c9;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .nav-toggle{display:none; width:32px; height:32px; align-items:center; justify-content:center;}
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    content:''; display:block; width:20px; height:2px; background:var(--text-primary); position:relative; transition:.2s;
+  }
+  .nav-toggle span::before{position:absolute; top:-6px;}
+  .nav-toggle span::after{position:absolute; top:6px;}
+
+  /* -------------------- HERO -------------------- */
+  .hero{
+    background:var(--bg-base);
+    position:relative; overflow:hidden;
+    padding-top:96px; padding-bottom:96px;
+  }
+  .hero::before{
+    content:''; position:absolute; left:50%; top:4%; transform:translateX(-50%);
+    width:700px; height:500px; background:rgba(171,213,81,0.05); filter:blur(70px); border-radius:12px;
+  }
+  .hero-grid{
+    position:relative; display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:center;
+  }
+  .hero-eyebrow-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(40,42,45,0.6); backdrop-filter:blur(6px);
+    padding:4px 12px; border-radius:4px; margin-bottom:24px;
+  }
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0;}
+  .hero-eyebrow-badge span{font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--accent);}
+  .hero h1{
+    font-size:clamp(36px, 5.5vw, 72px); line-height:1.06; letter-spacing:-0.04em; margin-bottom:16px;
+  }
+  .hero h1 .accent{color:var(--accent);}
+  .hero .lede{margin-bottom:24px;}
+  .value-strip{
+    display:flex; align-items:center; gap:8px;
+    background:var(--card); border-radius:8px; padding:16px; max-width:512px; margin-bottom:32px;
+    font-weight:600; font-size:18px; letter-spacing:-0.01em;
+  }
+  .value-strip svg{flex-shrink:0;}
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px;}
+  .fine-print{font-size:13px; color:var(--text-muted); letter-spacing:0.005em;}
+
+  /* Dashboard visual */
+  .dash-wrap{position:relative; display:flex; align-items:center; justify-content:center;}
+  .dash-glow{
+    position:absolute; inset:-16px; border-radius:24px; filter:blur(20px);
+    background:linear-gradient(45deg, rgba(171,213,81,0.1) 0%, rgba(40,42,45,0.2) 50%, rgba(40,42,45,0) 100%);
+  }
+  .dash-card{
+    position:relative; background:var(--bg-alt2); border-radius:16px; padding:32px;
+    box-shadow:0 25px 50px -12px rgba(0,0,0,0.25); width:100%; max-width:580px;
+  }
+  .dash-header{display:flex; align-items:center; justify-content:space-between; padding-bottom:16px;}
+  .dash-dots{display:flex; align-items:center; gap:8px;}
+  .dash-dots i{width:12px; height:12px; border-radius:50%; display:block;}
+  .dash-dots i:nth-child(1){background:#93000a;}
+  .dash-dots i:nth-child(2){background:var(--border);}
+  .dash-dots i:nth-child(3){background:#779d1c;}
+  .dash-id{font-family:var(--font-mono); font-weight:500; font-size:13px; letter-spacing:0.02em; color:var(--text-muted); margin-left:8px;}
+  .dash-tag{
+    display:flex; align-items:center; gap:4px; background:var(--surface); border-radius:2px; padding:2px 8px;
+  }
+  .dash-tag .dot{width:6px; height:6px;}
+  .dash-tag span{font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent);}
+
+  .split-view{display:flex; gap:16px; padding-top:8px;}
+  .state-card{flex:1; border-radius:8px; padding:16px; display:flex; flex-direction:column; justify-content:space-between;}
+  .state-a{background:rgba(26,28,31,0.7); opacity:.6;}
+  .state-b{background:var(--card-alt); box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -4px rgba(0,0,0,0.1); position:relative; overflow:hidden;}
+  .state-glow{position:absolute; top:0; right:0; width:112px; height:112px; background:rgba(171,213,81,0.1); filter:blur(12px); border-radius:12px;}
+  .state-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
+  .state-label{font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);}
+  .state-label.on{color:var(--accent);}
+  .state-pill{font-family:var(--font-mono); font-size:10px; background:var(--border); padding:2px 4px; border-radius:2px; color:var(--text-muted);}
+  .state-pill.on{background:rgba(171,213,81,0.2); color:var(--accent); font-weight:700;}
+  .bar{height:16px; border-radius:2px; background:var(--border); margin-bottom:8px;}
+  .bar.small{height:10px; width:70%; background:#1e2023;}
+  .placeholder-line{background:rgba(40,42,45,0.4); border-radius:2px; padding:4px; font-family:var(--font-mono); font-size:12px; color:var(--text-muted); margin-bottom:8px;}
+  .risk-note{display:flex; align-items:center; gap:4px; font-family:var(--font-mono); font-size:11px; color:var(--danger-text); margin-top:16px;}
+  .role-title{font-weight:600; font-size:18px; letter-spacing:-0.01em; margin-bottom:2px;}
+  .role-sub{font-weight:500; font-size:13px; color:var(--accent); margin-bottom:12px;}
+  .check-item{display:flex; gap:8px; align-items:flex-start; font-size:12px; color:var(--text-secondary); margin-bottom:10px; line-height:1.4;}
+  .check-item svg{flex-shrink:0; margin-top:3px;}
+  .ats-row{display:flex; align-items:center; justify-content:space-between; padding-top:12px; font-family:var(--font-mono); font-size:11px; color:var(--accent);}
+
+  .telemetry-grid{display:flex; gap:12px; padding-top:16px;}
+  .micro-card{flex:1; background:rgba(40,42,45,0.9); backdrop-filter:blur(6px); border-radius:8px; padding:12px; display:flex; flex-direction:column; justify-content:space-between;}
+  .micro-label{font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px;}
+  .micro-value{display:flex; align-items:baseline; gap:4px; margin-bottom:4px;}
+  .micro-value .big{font-family:var(--font-display); font-weight:800; font-size:32px; letter-spacing:-0.02em; color:var(--accent);}
+  .micro-value .big.light{color:var(--text-primary);}
+  .micro-value .small{font-family:var(--font-mono); font-size:11px; color:var(--text-muted);}
+  .micro-track{height:6px; border-radius:12px; background:var(--border); overflow:hidden; margin-top:4px;}
+  .micro-fill{height:100%; background:var(--accent); border-radius:12px;}
+  .micro-foot{display:flex; align-items:center; gap:4px; font-family:var(--font-mono); font-size:11px; color:var(--accent); margin-top:4px;}
+
+  .float-banner{display:flex; align-items:center; justify-content:space-between; background:var(--card); border-radius:8px; padding:12px; margin-top:16px;}
+  .float-left{display:flex; align-items:center; gap:8px;}
+  .float-icon{width:28px; height:28px; border-radius:4px; background:rgba(171,213,81,0.15); display:flex; align-items:center; justify-content:center;}
+  .float-left span{font-size:13px; letter-spacing:0.005em;}
+  .float-right{font-family:var(--font-mono); font-size:13px; letter-spacing:0.02em; color:var(--accent);}
+
+  /* -------------------- SECTION HEADERS -------------------- */
+  .section-head{max-width:672px; margin-bottom:64px;}
+  .section-head.center{max-width:768px; margin-left:auto; margin-right:auto; text-align:center;}
+  .section-head h2{font-size:clamp(28px,4vw,44px); line-height:1.1;}
+  .section-head .lede{margin-top:8px; max-width:none;}
+  .section-head.center .lede{margin-left:auto; margin-right:auto;}
+
+  /* -------------------- ACHIEVEMENT / FEATURE GRID -------------------- */
+  .achievement{background:var(--bg-alt);}
+  .feature-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .feature-card{background:var(--card); border-radius:16px; padding:32px; display:flex; flex-direction:column; justify-content:space-between;}
+  .feature-top-row{display:flex; align-items:flex-start; justify-content:space-between;}
+  .feature-num{font-family:var(--font-display); font-weight:800; font-size:48px; letter-spacing:-0.03em; color:var(--border);}
+  .feature-icon{width:48px; height:48px; border-radius:8px; background:var(--surface); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .feature-eyebrow{font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.07em; text-transform:uppercase; color:var(--accent); margin-top:28px; margin-bottom:8px; display:block;}
+  .feature-card h3{font-size:24px; letter-spacing:-0.02em; margin-bottom:8px;}
+  .feature-card p{font-size:15px; color:var(--text-secondary); line-height:1.6;}
+  .feature-tag{display:flex; align-items:center; gap:8px; margin-top:32px; padding-top:16px;}
+  .feature-tag span{font-family:var(--font-mono); font-weight:500; font-size:13px; letter-spacing:0.02em; color:var(--text-muted);}
+
+  /* -------------------- CAREER TRANSFORMATION -------------------- */
+  .transformation{background:var(--bg-alt2);}
+  .compare-wrap{display:grid; grid-template-columns:1fr auto 1fr; gap:24px; align-items:center;}
+  .compare-card{border-radius:16px; padding:32px;}
+  .before-card{background:var(--card); opacity:.85;}
+  .after-card{background:var(--card-alt); box-shadow:0 25px 50px -12px rgba(0,0,0,0.25); position:relative; overflow:hidden;}
+  .after-glow{position:absolute; top:-40px; right:-40px; width:176px; height:176px; background:rgba(171,213,81,0.1); filter:blur(32px); border-radius:12px;}
+  .compare-head{display:flex; align-items:flex-start; justify-content:space-between; padding-bottom:12px;}
+  .compare-eyebrow{font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:2px;}
+  .compare-eyebrow.on{color:var(--accent);}
+  .compare-head h3{font-size:24px; letter-spacing:-0.02em;}
+  .compare-badge{width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .compare-badge.no{background:rgba(147,0,10,0.3);}
+  .compare-badge.yes{background:rgba(171,213,81,0.2);}
+  .compare-list{display:flex; flex-direction:column; gap:16px; padding:8px 0 16px;}
+  .compare-item{display:flex; gap:12px; align-items:center; font-size:15px;}
+  .compare-item.bad{color:var(--text-secondary);}
+  .compare-item.good{color:var(--text-primary); font-weight:500;}
+  .compare-mark{width:24px; height:24px; border-radius:2px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .compare-mark.no{background:var(--surface);}
+  .compare-mark.yes{background:rgba(171,213,81,0.2);}
+  .compare-outcome{border-radius:4px; padding:12px; text-align:center; font-family:var(--font-mono); font-weight:500; font-size:13px; letter-spacing:0.02em;}
+  .compare-outcome.bad{background:var(--surface); color:var(--text-muted);}
+  .compare-outcome.good{background:rgba(171,213,81,0.15); color:var(--accent); font-weight:700;}
+  .bridge-col{display:flex; flex-direction:column; align-items:center;}
+  .bridge-line{width:1px; height:64px; background:linear-gradient(to bottom, rgba(171,213,81,0), var(--accent));}
+  .bridge-line.down{background:linear-gradient(to bottom, var(--accent), rgba(171,213,81,0));}
+  .bridge-badge{
+    background:var(--surface); border-radius:12px; padding:12px; display:flex; flex-direction:column; align-items:center; gap:4px;
+    box-shadow:0 0 10px rgba(199,243,107,0.25); margin:8px 0;
+  }
+  .bridge-badge span{font-family:var(--font-mono); font-size:9px; letter-spacing:-0.02em; text-transform:uppercase; color:var(--accent);}
+
+  /* -------------------- HOW IT WORKS -------------------- */
+  .how-it-works{background:var(--bg-alt);}
+  .timeline{position:relative;}
+  .timeline-track{position:relative; height:2px; background:var(--border); margin-bottom:-1px; top:56px; z-index:0;}
+  .timeline-track-fill{position:absolute; top:0; left:0; height:2px; width:60%; background:var(--accent);}
+  .timeline-steps{display:grid; grid-template-columns:repeat(5,1fr); gap:24px; position:relative; z-index:1;}
+  .step-card{background:var(--card); border-radius:8px; padding:24px; display:flex; flex-direction:column; justify-content:space-between; min-height:280px;}
+  .step-badge{width:56px; height:56px; border-radius:12px; background:var(--border); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; color:var(--accent); margin-bottom:8px;}
+  .step-badge.active{background:var(--accent); color:var(--accent-ink); box-shadow:0 0 8px rgba(199,243,107,0.3);}
+  .step-card h3{font-family:var(--font-body); font-weight:700; font-size:18px; letter-spacing:-0.01em; margin-bottom:8px;}
+  .step-card p{font-size:13px; color:var(--text-secondary); letter-spacing:0.005em; line-height:1.55;}
+  .step-tag{font-family:var(--font-mono); font-size:11px; color:var(--text-muted); margin-top:16px; display:block;}
+  .step-tag.on{color:var(--accent);}
+
+  /* -------------------- RESULTS / STATS -------------------- */
+  .results{background:var(--bg-base);}
+  .stat-row{display:flex; gap:24px; margin-bottom:24px; flex-wrap:wrap;}
+  .stat-card{flex:1; min-width:200px; background:var(--card); border-radius:16px; padding:32px; display:flex; flex-direction:column; justify-content:space-between;}
+  .stat-label{font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:16px;}
+  .stat-num{font-family:var(--font-display); font-weight:800; font-size:56px; letter-spacing:-0.025em; color:var(--text-primary); margin-bottom:16px;}
+  .stat-num.accent{color:var(--accent);}
+  .stat-sub{font-weight:500; font-size:18px; letter-spacing:-0.01em;}
+  .snapshot-card{background:var(--card-alt); border-radius:16px; padding:32px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1),0 8px 10px -6px rgba(0,0,0,0.1);}
+  .snapshot-grid{display:grid; grid-template-columns:1fr 2fr; gap:24px; align-items:center;}
+  .snapshot-badge{display:inline-flex; align-items:center; gap:4px; background:var(--surface); border-radius:2px; padding:2px 8px; margin-bottom:12px;}
+  .snapshot-badge span{font-family:var(--font-mono); font-size:11px; color:var(--accent);}
+  .snapshot-left h3{font-size:24px; letter-spacing:-0.02em; margin-bottom:8px; line-height:1.25;}
+  .snapshot-left p{font-size:13px; color:var(--text-secondary); letter-spacing:0.005em; line-height:1.55;}
+  .skill-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .skill-card{flex:1; min-width:180px; background:var(--surface); border-radius:8px; padding:16px;}
+  .skill-label{font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; display:block;}
+  .skill-name-row{display:flex; align-items:center; gap:8px; margin-bottom:8px;}
+  .skill-name{font-weight:600; font-size:18px; letter-spacing:-0.01em;}
+  .skill-track{height:4px; border-radius:12px; background:var(--border); margin-bottom:8px; overflow:hidden;}
+  .skill-fill{height:100%; background:var(--accent); border-radius:12px;}
+  .skill-rank{font-family:var(--font-mono); font-size:10px; color:var(--text-muted);}
+
+  /* -------------------- LEAD FORM -------------------- */
+  .lead-form-section{background:var(--bg-alt);}
+  .lead-grid{display:grid; grid-template-columns:5fr 7fr; gap:24px;}
+  .value-bullets{display:flex; flex-direction:column; gap:16px; margin-top:24px;}
+  .value-bullet{display:flex; gap:16px; background:var(--card); border-radius:8px; padding:16px;}
+  .value-num{background:var(--surface); border-radius:2px; padding:2px 8px; font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; color:var(--accent); height:fit-content; flex-shrink:0;}
+  .value-bullet h4{font-weight:600; font-size:18px; letter-spacing:-0.01em; margin-bottom:4px;}
+  .value-bullet p{font-size:13px; color:var(--text-secondary); letter-spacing:0.005em; line-height:1.5;}
+
+  .form-panel{background:var(--card-alt); border-radius:16px; padding:48px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);}
+  .form-panel h3{font-size:24px; letter-spacing:-0.02em; margin-bottom:2px;}
+  .form-panel .form-sub{font-size:13px; color:var(--text-secondary); letter-spacing:0.005em; margin-bottom:24px; display:block;}
+  .field{margin-bottom:16px;}
+  .field label{
+    display:block; font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--text-secondary); margin-bottom:4px;
+  }
+  .field input{background:var(--surface); border-radius:4px; padding:14px 16px; font-size:15px;}
+  .field-row{display:flex; gap:16px;}
+  .field-row .field{flex:1;}
+  .submit-btn{
+    width:100%; display:flex; align-items:center; justify-content:center; gap:8px;
+    background:var(--accent); color:var(--accent-ink); font-weight:700; font-size:18px; letter-spacing:-0.01em;
+    border-radius:8px; padding:16px 32px; margin-top:8px;
+    box-shadow:0 0 12px rgba(199,243,107,0.22);
+  }
+  .submit-btn:disabled{opacity:.7; cursor:not-allowed;}
+  .form-note{text-align:center; font-size:13px; color:var(--text-muted); letter-spacing:0.005em; margin-top:8px;}
+  .form-status{text-align:center; font-size:14px; margin-top:12px; min-height:20px; font-weight:600;}
+  .form-status.success{color:var(--accent);}
+  .form-status.error{color:var(--danger-text);}
+
+  /* -------------------- TESTIMONIALS -------------------- */
+  .testimonials{background:var(--bg-alt2);}
+  .testi-row{display:flex; gap:24px; flex-wrap:wrap;}
+  .testi-card{flex:1; min-width:280px; background:var(--card); border-radius:16px; padding:32px; display:flex; flex-direction:column; justify-content:space-between;}
+  .stars{display:flex; gap:4px; margin-bottom:16px;}
+  .quote{font-size:15px; color:var(--text-primary); line-height:1.62; margin-bottom:24px;}
+  .testi-person{display:flex; gap:12px; align-items:center;}
+  .avatar{width:40px; height:40px; border-radius:12px; background:var(--surface); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:700; font-size:14px; color:var(--accent); flex-shrink:0;}
+  .testi-name{font-weight:600; font-size:18px; letter-spacing:-0.01em;}
+  .testi-role{font-size:13px; color:var(--text-muted); letter-spacing:0.005em;}
+
+  /* -------------------- FINAL CTA -------------------- */
+  .final-cta{background:var(--bg-base); position:relative; overflow:hidden; text-align:center;}
+  .final-cta::before{
+    content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:600px; height:350px; background:rgba(171,213,81,0.1); filter:blur(65px); border-radius:12px;
+  }
+  .final-cta-inner{position:relative; max-width:768px; margin:0 auto;}
+  .final-cta h2{font-size:clamp(32px,6vw,56px); line-height:1.1; margin-bottom:12px;}
+  .final-cta .lede{margin:0 auto 20px; max-width:576px; text-align:center;}
+  .final-cta .fine-print{font-family:var(--font-mono); letter-spacing:0.05em; text-transform:uppercase; margin-top:12px;}
+
+  /* -------------------- FAQ -------------------- */
+  .faq{background:var(--bg-alt);}
+  .faq .wrap{max-width:768px;}
+  .faq-list{display:flex; flex-direction:column; gap:12px;}
+  .faq-item{background:var(--card); border-radius:8px; overflow:hidden; box-shadow:0 1px 2px rgba(0,0,0,0.05);}
+  .faq-question{
+    width:100%; display:flex; align-items:center; justify-content:space-between; padding:16px 24px;
+    font-weight:600; font-size:18px; letter-spacing:-0.01em; text-align:left;
+  }
+  .faq-question svg{flex-shrink:0; transition:transform .2s;}
+  .faq-item.open .faq-question svg{transform:rotate(180deg);}
+  .faq-answer{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .faq-answer p{padding:0 24px 20px; font-size:15px; color:var(--text-secondary); line-height:1.6;}
+
+  /* -------------------- FOOTER -------------------- */
+  footer.site-footer{background:var(--bg-alt2); border-top:1px solid var(--border); padding:97px 0 48px;}
+  .footer-top{display:grid; grid-template-columns:2fr 1fr 1fr; gap:48px; margin-bottom:64px;}
+  .footer-brand h4{font-family:var(--font-display); font-weight:700; font-size:clamp(28px,4vw,48px); letter-spacing:-0.02em; margin-bottom:12px;}
+  .footer-brand p{font-size:18px; color:var(--text-secondary); letter-spacing:-0.01em; margin-bottom:32px;}
+  .status-label{font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:10px;}
+  .status-chip{display:inline-flex; align-items:center; gap:4px; background:var(--surface); border:1px solid var(--border); border-radius:2px; padding:3px 9px;}
+  .status-chip span{font-family:var(--font-mono); font-size:13px; letter-spacing:0.02em;}
+  .footer-col h5{font-family:var(--font-mono); font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-secondary); margin-bottom:16px;}
+  .footer-col ul{display:flex; flex-direction:column; gap:12px;}
+  .footer-col a{font-size:15px; color:var(--text-secondary);}
+  .footer-col .social a{display:flex; align-items:center; gap:8px;}
+  .footer-col .compliance{margin-top:24px;}
+  .footer-col .compliance h5{margin-bottom:16px;}
+  .footer-col .compliance ul{gap:4px;}
+  .footer-col .compliance a{font-size:13px; color:var(--text-muted);}
+  .footer-bottom{border-top:1px solid var(--surface); padding-top:33px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+  .footer-bottom p{font-size:13px; color:var(--text-muted); letter-spacing:0.005em;}
+  .footer-meta{display:flex; gap:16px;}
+  .footer-meta span{font-family:var(--font-mono); font-size:13px; letter-spacing:0.02em; color:var(--text-muted);}
+
+  /* -------------------- RESPONSIVE -------------------- */
+  @media (max-width: 1024px){
+    .wrap{padding:0 32px;}
+    .hero-grid{grid-template-columns:1fr;}
+    .dash-wrap{margin-top:48px;}
+    .feature-grid{grid-template-columns:1fr;}
+    .compare-wrap{grid-template-columns:1fr;}
+    .bridge-col{flex-direction:row; padding:24px 0;}
+    .bridge-line{width:64px; height:1px;}
+    .timeline-steps{grid-template-columns:repeat(2,1fr);}
+    .timeline-track, .timeline-track-fill{display:none;}
+    .stat-row{flex-wrap:wrap;}
+    .stat-card{min-width:45%;}
+    .lead-grid{grid-template-columns:1fr;}
+    .form-panel{padding:32px;}
+    .snapshot-grid{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr 1fr;}
+    .footer-brand{grid-column:1/-1;}
+  }
+
+  @media (max-width: 720px){
+    section{padding:80px 0;}
+    .wrap{padding:0 20px;}
+    nav.main-nav{display:none;}
+    .nav-toggle{display:flex;}
+    .header-actions .btn-sm{display:none;}
+    .field-row{flex-direction:column;}
+    .timeline-steps{grid-template-columns:1fr;}
+    .stat-card{min-width:100%;}
+    .footer-top{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column; align-items:flex-start;}
+    .final-cta{padding:80px 0;}
+    .faq-question{font-size:16px;}
+    section.hero, section.transformation, section.faq{padding-left:0; padding-right:0;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ HEADER ============================================================ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark">Z</span>
+      <span class="brand-name">Zero2Hero</span>
+    </a>
+    <nav class="main-nav">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#results">Results</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#lead-form" class="btn btn-sm btn-accent">Get Started</a>
+      <button class="icon-btn" aria-label="Account">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#0c0e11"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke="#0c0e11" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================================================ HERO ============================================================ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="hero-eyebrow-badge">
+        <span class="dot"></span>
+        <span>From Zero Experience to a Resume That Stands Out</span>
+      </div>
+      <h1>Your Resume Shouldn&rsquo;t Be the Reason You <span class="accent">Get Rejected.</span></h1>
+      <p class="lede">We help students and early-career professionals build real internship experience, strengthen their resumes, and position themselves for the opportunities they actually want.</p>
+      <div class="value-strip">
+        <svg width="16" height="20" viewBox="0 0 16 20" fill="none"><path d="M9 0L0 11h6l-2 9 11-13H8l1-7z" fill="#abd551"/></svg>
+        <span>We strategize. We script. We manage. You grow.</span>
+      </div>
+      <div class="cta-row">
+        <a href="#lead-form" class="btn btn-accent">Get Started
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#253600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
+      </div>
+      <p class="fine-print">Stop applying with an empty resume. Start building a career story worth noticing.</p>
+    </div>
+
+    <div class="dash-wrap">
+      <div class="dash-glow"></div>
+      <div class="dash-card">
+        <div class="dash-header">
+          <div style="display:flex; align-items:center;">
+            <div class="dash-dots"><i></i><i></i><i></i></div>
+            <span class="dash-id">CANDIDATE_RECORD_#0948</span>
+          </div>
+          <div class="dash-tag"><span class="dot" style="width:6px;height:6px;"></span><span>Accelerated</span></div>
+        </div>
+
+        <div class="split-view">
+          <div class="state-card state-a">
+            <div>
+              <div class="state-row">
+                <span class="state-label">State: Initial</span>
+                <span class="state-pill">0 EXP</span>
+              </div>
+              <div class="bar"></div>
+              <div class="bar small"></div>
+              <div style="margin-top:8px;">
+                <div class="placeholder-line">[ No relevant projects found ]</div>
+                <div class="placeholder-line">[ Generic course listing ]</div>
+              </div>
+            </div>
+            <div class="risk-note">
+              <svg width="13" height="11" viewBox="0 0 24 24" fill="none"><path d="M12 2L1 21h22L12 2z" stroke="#ffb4ab" stroke-width="2" stroke-linejoin="round"/><path d="M12 9v5M12 17h.01" stroke="#ffb4ab" stroke-width="2" stroke-linecap="round"/></svg>
+              High drop-off risk
+            </div>
+          </div>
+
+          <div class="state-card state-b">
+            <div class="state-glow"></div>
+            <div>
+              <div class="state-row">
+                <span class="state-label on">State: Verified</span>
+                <span class="state-pill on">Career Ready</span>
+              </div>
+              <div class="role-title">Tech / Product Fellow</div>
+              <div class="role-sub">Fintech &amp; SaaS Systems</div>
+              <div class="check-item">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#abd551" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Led user retention sprints (+18% flow lift)
+              </div>
+              <div class="check-item">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#abd551" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Audited backend pipeline schemas with eng lead
+              </div>
+            </div>
+            <div class="ats-row">
+              <span>ATS Benchmark: Top 2%</span>
+              <svg width="15" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 5.5L20 8.5l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1L12 2z" fill="#abd551"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="telemetry-grid">
+          <div class="micro-card">
+            <span class="micro-label">Profile Strength</span>
+            <div class="micro-value"><span class="big">92%</span><span class="small">+38%</span></div>
+            <div class="micro-track"><div class="micro-fill" style="width:92%;"></div></div>
+          </div>
+          <div class="micro-card">
+            <span class="micro-label">ATS Score</span>
+            <div class="micro-value"><span class="big light">98</span><span class="small">/ 100</span></div>
+            <div class="micro-foot">
+              <svg width="9" height="7" viewBox="0 0 24 24" fill="none"><path d="M3 12l6 6L21 6" stroke="#abd551" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Algorithmic Match
+            </div>
+          </div>
+          <div class="micro-card">
+            <span class="micro-label">Target Placement</span>
+            <div class="micro-value"><span class="big" style="font-size:22px;">+$32</span><span class="small">/hr</span></div>
+            <span class="small" style="color:var(--text-secondary);">3 Interviews Active</span>
+          </div>
+        </div>
+
+        <div class="float-banner">
+          <div class="float-left">
+            <div class="float-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="2" stroke="#abd551" stroke-width="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="#abd551" stroke-width="2"/></svg>
+            </div>
+            <span>Real-world Fintech &amp; SaaS Project deliverables</span>
+          </div>
+          <div class="float-right">READY</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ ACHIEVEMENT / VALUE ============================================================ -->
+<section class="achievement" id="results">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Strategic Positioning</span>
+      <h2>You Don&rsquo;t Need More Applications. You Need Better Experience.</h2>
+      <p class="lede" style="max-width:none;">Sending hundreds of applications with the same empty resume isn&rsquo;t a strategy. We help you build the experience, projects, positioning, and confidence that make your resume stronger&mdash;and your next application much easier.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div>
+          <div class="feature-top-row">
+            <span class="feature-num">01</span>
+            <div class="feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#abd551" stroke-width="2"/><path d="M12 7l2 4 4 1-4 1-2 4-2-4-4-1 4-1 2-4z" fill="#abd551"/></svg>
+            </div>
+          </div>
+          <span class="feature-eyebrow">Strategy</span>
+          <h3>Strategized for You</h3>
+          <p>We figure out what kind of experience will actually strengthen your profile and align with your career goals.</p>
+        </div>
+        <div class="feature-tag"><span>Career Path Mapping</span>
+          <svg width="13" height="6" viewBox="0 0 24 12" fill="none"><path d="M0 6h22M16 0l6 6-6 6" stroke="#8f9194" stroke-width="1.5"/></svg>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div>
+          <div class="feature-top-row">
+            <span class="feature-num">02</span>
+            <div class="feature-icon">
+              <svg width="19" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 21l4-1 12-12-3-3L4 17l-1 4z" stroke="#abd551" stroke-width="2" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <span class="feature-eyebrow">Scripting</span>
+          <h3>Scripts That Make It Happen</h3>
+          <p>From outreach to applications and professional communication, we help you approach opportunities with the right strategy and messaging.</p>
+        </div>
+        <div class="feature-tag"><span>High-Response Outreach</span>
+          <svg width="13" height="6" viewBox="0 0 24 12" fill="none"><path d="M0 6h22M16 0l6 6-6 6" stroke="#8f9194" stroke-width="1.5"/></svg>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div>
+          <div class="feature-top-row">
+            <span class="feature-num">03</span>
+            <div class="feature-icon">
+              <svg width="20" height="15" viewBox="0 0 24 20" fill="none"><path d="M3 5l4 4 6-8" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 15l4 4 6-8" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6h8M15 17h8" stroke="#abd551" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+          <span class="feature-eyebrow">Management</span>
+          <h3>Managed From Start to Finish</h3>
+          <p>You don&rsquo;t have to figure everything out alone. We help coordinate the process so you can focus on learning, contributing, and growing.</p>
+        </div>
+        <div class="feature-tag"><span>Hands-On Mentorship</span>
+          <svg width="13" height="6" viewBox="0 0 24 12" fill="none"><path d="M0 6h22M16 0l6 6-6 6" stroke="#8f9194" stroke-width="1.5"/></svg>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div>
+          <div class="feature-top-row">
+            <span class="feature-num">04</span>
+            <div class="feature-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2c0 6-4 8-4 8s6 0 8-4c0 0 2 6-4 12l-4-4-4-4c6-6 8-4 8-4z" stroke="#abd551" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <span class="feature-eyebrow">Growth</span>
+          <h3>Built for Your Next Opportunity</h3>
+          <p>Every experience should take you somewhere. The goal isn&rsquo;t just another internship&mdash;it&rsquo;s a stronger profile for what comes next.</p>
+        </div>
+        <div class="feature-tag"><span>Long-Term Trajectory</span>
+          <svg width="13" height="6" viewBox="0 0 24 12" fill="none"><path d="M0 6h22M16 0l6 6-6 6" stroke="#8f9194" stroke-width="1.5"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CAREER TRANSFORMATION ============================================================ -->
+<section class="transformation">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow" style="text-align:center;">Comparative Paradigm</span>
+      <h2>From &ldquo;I Have No Experience&rdquo; to &ldquo;Here&rsquo;s What I&rsquo;ve Done.&rdquo;</h2>
+    </div>
+
+    <div class="compare-wrap">
+      <div class="compare-card before-card">
+        <div class="compare-head">
+          <div>
+            <span class="compare-eyebrow">Status Baseline</span>
+            <h3>0 Experience</h3>
+          </div>
+          <div class="compare-badge no">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#ff8a80" stroke-width="2"/><path d="M6 6l12 12" stroke="#ff8a80" stroke-width="2"/></svg>
+          </div>
+        </div>
+        <div class="compare-list">
+          <div class="compare-item bad"><span class="compare-mark no">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#8f9194" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </span>Empty resume with placeholder school projects</div>
+          <div class="compare-item bad"><span class="compare-mark no">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#8f9194" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </span>No clear career direction or industry targeting</div>
+          <div class="compare-item bad"><span class="compare-mark no">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#8f9194" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </span>Sending generic applications into automated job portals</div>
+          <div class="compare-item bad"><span class="compare-mark no">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#8f9194" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </span>No verified professional industry references</div>
+          <div class="compare-item bad"><span class="compare-mark no">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="#8f9194" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </span>Low confidence when speaking to technical hiring managers</div>
+        </div>
+        <div class="compare-outcome bad">OUTCOME: 97% AUTOMATED REJECTION RATE</div>
+      </div>
+
+      <div class="bridge-col">
+        <div class="bridge-line"></div>
+        <div class="bridge-badge">
+          <svg width="20" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>The Bridge</span>
+        </div>
+        <div class="bridge-line down"></div>
+      </div>
+
+      <div class="compare-card after-card">
+        <div class="after-glow"></div>
+        <div class="compare-head">
+          <div>
+            <span class="compare-eyebrow on">Status Accelerated</span>
+            <h3>Career Ready</h3>
+          </div>
+          <div class="compare-badge yes">
+            <svg width="22" height="21" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#abd551" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="#abd551" stroke-width="2"/></svg>
+          </div>
+        </div>
+        <div class="compare-list">
+          <div class="compare-item good"><span class="compare-mark yes">
+            <svg width="11" height="8" viewBox="0 0 24 24" fill="none"><path d="M3 12l6 6L21 6" stroke="#abd551" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>Verified real-world experience &amp; measurable deliverables</div>
+          <div class="compare-item good"><span class="compare-mark yes">
+            <svg width="11" height="8" viewBox="0 0 24 24" fill="none"><path d="M3 12l6 6L21 6" stroke="#abd551" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>Engineered resume scoring 95+ on leading ATS systems</div>
+          <div class="compare-item good"><span class="compare-mark yes">
+            <svg width="11" height="8" viewBox="0 0 24 24" fill="none"><path d="M3 12l6 6L21 6" stroke="#abd551" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>Targeted career trajectory tailored to high-growth roles</div>
+          <div class="compare-item good"><span class="compare-mark yes">
+            <svg width="11" height="8" viewBox="0 0 24 24" fill="none"><path d="M3 12l6 6L21 6" stroke="#abd551" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>Professional portfolio &amp; battle-tested outbound scripts</div>
+          <div class="compare-item good"><span class="compare-mark yes">
+            <svg width="11" height="8" viewBox="0 0 24 24" fill="none"><path d="M3 12l6 6L21 6" stroke="#abd551" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>High interview confidence backed by real work stories</div>
+        </div>
+        <div class="compare-outcome good">OUTCOME: HIGH-INTENT INTERVIEW CONVERSIONS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ HOW IT WORKS ============================================================ -->
+<section class="how-it-works" id="how-it-works">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Execution Blueprint</span>
+      <h2>Your Career Doesn&rsquo;t Need to Start With Experience. It Starts With the Right Plan.</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-track"><div class="timeline-track-fill"></div></div>
+      <div class="timeline-steps">
+        <div class="step-card">
+          <div>
+            <div class="step-badge">01</div>
+            <h3>Understand</h3>
+            <p>We understand your background, goals, interests, and current profile.</p>
+          </div>
+          <span class="step-tag">Diagnostic Phase</span>
+        </div>
+        <div class="step-card">
+          <div>
+            <div class="step-badge">02</div>
+            <h3>Strategize</h3>
+            <p>We identify the experience and opportunities that can strengthen your career direction.</p>
+          </div>
+          <span class="step-tag">Roadmap Mapping</span>
+        </div>
+        <div class="step-card">
+          <div>
+            <div class="step-badge active">03</div>
+            <h3>Position</h3>
+            <p>We improve how you present yourself through your resume, profile, and communication.</p>
+          </div>
+          <span class="step-tag on">Asset Engineering</span>
+        </div>
+        <div class="step-card">
+          <div>
+            <div class="step-badge">04</div>
+            <h3>Execute</h3>
+            <p>We help script, organize, and manage the internship process.</p>
+          </div>
+          <span class="step-tag">Operational Drive</span>
+        </div>
+        <div class="step-card">
+          <div>
+            <div class="step-badge">05</div>
+            <h3>Grow</h3>
+            <p>You walk away with real experience, stronger proof of your skills, and a better story to tell.</p>
+          </div>
+          <span class="step-tag">Compound Outcome</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ RESULTS / STATS ============================================================ -->
+<section class="results">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Validated Impact</span>
+      <h2>Build Experience That Actually Moves Your Career Forward.</h2>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <span class="stat-label">Cohort Coupling</span>
+        <div class="stat-num accent">500+</div>
+        <div class="stat-sub">Students Supported</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Outreach Scale</span>
+        <div class="stat-num">1,000+</div>
+        <div class="stat-sub">Applications Strategized</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Partner Pipeline</span>
+        <div class="stat-num accent">200+</div>
+        <div class="stat-sub">Internship Opportunities</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Execution Success</span>
+        <div class="stat-num">95%</div>
+        <div class="stat-sub">Profile Completion</div>
+      </div>
+    </div>
+
+    <div class="snapshot-card">
+      <div class="snapshot-grid">
+        <div class="snapshot-left">
+          <div class="snapshot-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 5.5L20 8.5l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1L12 2z" fill="#abd551"/></svg>
+            <span>ATS Match Engine Verified</span>
+          </div>
+          <h3>Algorithmic Resume Diagnostics</h3>
+          <p>Every resume engineered within ZERO2HERO passes strict keyword and contextual semantic relevance tests used by enterprise Fortune 500 applicant screening engines.</p>
+        </div>
+        <div class="skill-row">
+          <div class="skill-card">
+            <span class="skill-label">Skill Verified</span>
+            <div class="skill-name-row">
+              <span class="skill-name">Agile Delivery</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#abd551" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="skill-track"><div class="skill-fill" style="width:96%;"></div></div>
+            <span class="skill-rank">96% Semantic Rank</span>
+          </div>
+          <div class="skill-card">
+            <span class="skill-label">Skill Verified</span>
+            <div class="skill-name-row">
+              <span class="skill-name">Data Modeling</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#abd551" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="skill-track"><div class="skill-fill" style="width:91%;"></div></div>
+            <span class="skill-rank">91% Semantic Rank</span>
+          </div>
+          <div class="skill-card">
+            <span class="skill-label">Skill Verified</span>
+            <div class="skill-name-row">
+              <span class="skill-name">API Architecture</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#abd551" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="skill-track"><div class="skill-fill" style="width:88%;"></div></div>
+            <span class="skill-rank">88% Semantic Rank</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ LEAD FORM ============================================================ -->
+<section class="lead-form-section" id="lead-form">
+  <div class="wrap lead-grid">
+    <div class="lead-copy">
+      <span class="eyebrow">Initiate Profile Audit</span>
+      <h2 style="font-size:clamp(28px,4vw,44px); line-height:1.1; margin-bottom:8px;">Ready to Build a Resume You&rsquo;re Proud Of?</h2>
+      <p class="lede" style="max-width:none;">Tell us where you are right now, where you want to go, and what&rsquo;s holding you back. We&rsquo;ll help you figure out the next move.</p>
+
+      <div class="value-bullets">
+        <div class="value-bullet">
+          <span class="value-num">01</span>
+          <div>
+            <h4>Know what to do next.</h4>
+            <p>Stop wondering in circles; get clear steps engineered for your exact background.</p>
+          </div>
+        </div>
+        <div class="value-bullet">
+          <span class="value-num">02</span>
+          <div>
+            <h4>Build experience strategically.</h4>
+            <p>Target project deliverables that hiring managers care about in real evaluations.</p>
+          </div>
+        </div>
+        <div class="value-bullet">
+          <span class="value-num">03</span>
+          <div>
+            <h4>Create a stronger career profile.</h4>
+            <p>A fully refreshed resume, LinkedIn presence, and strategic outreach playbook.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-panel">
+      <h3>Candidate Assessment Form</h3>
+      <span class="form-sub">Takes less than 2 minutes. Free strategic analysis provided.</span>
+
+      <form id="leadForm">
+        <div class="field">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="e.g. Logesh" required />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="name@gmail.com" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="98765 43210" required />
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          Build My Profile
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#253600" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="form-status" id="formStatus"></div>
+      </form>
+      <p class="form-note">No complicated process. No guessing what to do next. Just a clear path forward.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ TESTIMONIALS ============================================================ -->
+<section class="testimonials" id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Verified Experiences</span>
+      <h2>They Started With a Blank Page. They Didn&rsquo;t Finish There.</h2>
+      <p class="lede" style="max-width:none;">Real growth starts when you stop wondering &ldquo;How do I get experience?&rdquo; and start building it.</p>
+    </div>
+
+    <div class="testi-row">
+      <div class="testi-card">
+        <div>
+          <div class="stars">
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+          </div>
+          <p class="quote">&ldquo;I had almost nothing to put on my resume and honestly didn&rsquo;t know where to start. The entire process gave me direction and helped me understand what kind of experience I actually needed.&rdquo;</p>
+        </div>
+        <div class="testi-person">
+          <div class="avatar">AK</div>
+          <div>
+            <div class="testi-name">Alex Kim</div>
+            <div class="testi-role">University Student</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div>
+          <div class="stars">
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+          </div>
+          <p class="quote">&ldquo;What I liked most was that I wasn&rsquo;t left to figure everything out myself. There was an actual strategy behind what I was doing, and my resume looks completely different now.&rdquo;</p>
+        </div>
+        <div class="testi-person">
+          <div class="avatar">MR</div>
+          <div>
+            <div class="testi-name">Marcus Rivera</div>
+            <div class="testi-role">Early-Career Professional</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <div>
+          <div class="stars">
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+            <svg width="15" height="14" viewBox="0 0 24 24" fill="#abd551"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.9l-6.2 3.4 1.6-6.8L2.2 8.9l6.9-.6L12 2z"/></svg>
+          </div>
+          <p class="quote">&ldquo;Before this, I was applying everywhere and hearing nothing back. Having someone help me build my profile and approach opportunities properly made a huge difference.&rdquo;</p>
+        </div>
+        <div class="testi-person">
+          <div class="avatar">SP</div>
+          <div>
+            <div class="testi-name">Sara Patel</div>
+            <div class="testi-role">Final-Year Student</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FINAL CTA ============================================================ -->
+<section class="final-cta">
+  <div class="wrap final-cta-inner">
+    <span class="eyebrow" style="text-align:center;">Begin Career Acceleration</span>
+    <h2>Your Next Opportunity Starts With Your Next Step.</h2>
+    <p class="lede">You don&rsquo;t need to have everything figured out. You just need a strategy to start moving forward.</p>
+    <a href="#lead-form" class="btn btn-accent">Start Building My Profile →</a>
+    <p class="fine-print">From Zero Experience to Career-Ready.</p>
+  </div>
+</section>
+
+<!-- ============================================================ FAQ ============================================================ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow" style="text-align:center;">Clarifications</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-list" id="faqList">
+      <div class="faq-item">
+        <button class="faq-question">Do I need any prior experience?
+          <svg width="12" height="8" viewBox="0 0 24 16" fill="none"><path d="M2 2l10 12L22 2" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><p>No. Zero2Hero is built specifically for people starting with no relevant experience. We meet you where you are and build a plan from there.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What exactly do you help with?
+          <svg width="12" height="8" viewBox="0 0 24 16" fill="none"><path d="M2 2l10 12L22 2" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><p>We help you identify the right experience to pursue, build your resume and profile, script your outreach, and manage the process end to end.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is this only for college students?
+          <svg width="12" height="8" viewBox="0 0 24 16" fill="none"><path d="M2 2l10 12L22 2" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><p>Not at all. We work with students and early-career professionals alike&mdash;anyone who needs a stronger, more strategic profile.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Will you guarantee me an internship?
+          <svg width="12" height="8" viewBox="0 0 24 16" fill="none"><path d="M2 2l10 12L22 2" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><p>We can&rsquo;t guarantee outcomes, but we significantly improve your odds by making sure your profile, positioning, and outreach are all working in your favor.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How long does the process take?
+          <svg width="12" height="8" viewBox="0 0 24 16" fill="none"><path d="M2 2l10 12L22 2" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><p>Most candidates see meaningful progress within a few weeks, depending on how much time you can commit each week.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What if I don&rsquo;t know what career I want?
+          <svg width="12" height="8" viewBox="0 0 24 16" fill="none"><path d="M2 2l10 12L22 2" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><p>That&rsquo;s completely normal, and it&rsquo;s where we start. The diagnostic phase helps narrow down direction before we build anything.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How do I get started?
+          <svg width="12" height="8" viewBox="0 0 24 16" fill="none"><path d="M2 2l10 12L22 2" stroke="#abd551" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><p>Fill out the Candidate Assessment Form above. It takes less than two minutes and we&rsquo;ll follow up with your free strategic analysis.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ FOOTER ============================================================ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h4>ZERO2HERO</h4>
+        <p>From zero experience to career-ready.</p>
+        <span class="status-label">Status Protocol</span>
+        <div class="status-chip">
+          <span class="dot" style="width:8px;height:8px;"></span>
+          <span>Applications Open for 2026 Cohorts</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#lead-form">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <ul class="social">
+          <li><a href="#"><svg width="12" height="11" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#c5c6ca" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="#c5c6ca" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="#c5c6ca"/></svg> Instagram</a></li>
+          <li><a href="#"><svg width="12" height="11" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="2" stroke="#c5c6ca" stroke-width="2"/><circle cx="7" cy="8" r="1.4" fill="#c5c6ca"/><path d="M6 11v7M12 11v7M12 14c0-2 3-3 5-1.5V18" stroke="#c5c6ca" stroke-width="1.8" stroke-linecap="round"/></svg> LinkedIn</a></li>
+          <li><a href="#"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="4" stroke="#c5c6ca" stroke-width="2"/><path d="M10 9.5l6 3-6 3v-6z" fill="#c5c6ca"/></svg> YouTube</a></li>
+        </ul>
+        <div class="compliance">
+          <h5>Compliance</h5>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ZERO2HERO. All rights reserved.</p>
+      <div class="footer-meta">
+        <span>EDITION: v2.6.4</span>
+        <span>ARCH: ACCELERATOR</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- Mobile nav toggle ----------
+  var navToggle = document.getElementById('navToggle');
+  var mainNav = document.querySelector('.main-nav');
+  if (navToggle) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = mainNav.style.display === 'flex';
+      mainNav.style.display = isOpen ? 'none' : 'flex';
+      mainNav.style.flexDirection = 'column';
+      mainNav.style.position = 'absolute';
+      mainNav.style.top = '80px';
+      mainNav.style.left = '0';
+      mainNav.style.right = '0';
+      mainNav.style.background = '#0c0e11';
+      mainNav.style.padding = '16px 20px';
+      mainNav.style.borderBottom = '1px solid #333538';
+      mainNav.style.gap = '16px';
+    });
+  }
+
+  // ---------- FAQ accordion ----------
+  document.querySelectorAll('.faq-item').forEach(function (item) {
+    var question = item.querySelector('.faq-question');
+    var answer = item.querySelector('.faq-answer');
+    question.addEventListener('click', function () {
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-answer').style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ---------- Lead form submission (Google Apps Script, no-cors GET) ----------
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwRP-QrdQ5ByfWP7xwh59g6mfYe6TRm7evY-Ya2fbNkhKaLFvSBVr7V_uFRzOWr28WuQg/exec';
+
+  var leadForm = document.getElementById('leadForm');
+  var submitBtn = document.getElementById('submitBtn');
+  var formStatus = document.getElementById('formStatus');
+
+  function showSuccess() {
+    formStatus.textContent = 'Thanks! Your assessment has been submitted.';
+    formStatus.className = 'form-status success';
+    leadForm.reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Build My Profile';
+  }
+
+  function showError() {
+    formStatus.textContent = 'Something went wrong. Please try again.';
+    formStatus.className = 'form-status error';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Build My Profile';
+  }
+
+  leadForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+
+    if (!name || !email || !phone) {
+      formStatus.textContent = 'Please fill in all fields.';
+      formStatus.className = 'form-status error';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    formStatus.textContent = '';
+    formStatus.className = 'form-status';
+
+    var url = SCRIPT_URL + '?' + new URLSearchParams({ name: name, email: email, phone: phone });
+
+    fetch(url, { method: 'GET', mode: 'no-cors' })
+      .then(function () { showSuccess(); })
+      .catch(function () { showError(); });
+  });
+</script>
+
+</body>
+</html>
